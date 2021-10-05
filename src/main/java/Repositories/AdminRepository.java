@@ -25,16 +25,18 @@ public class AdminRepository {
 
     public void executeStatement(String execute) {
         try {
-            this.statement.execute(execute);
+             this.statement.execute(execute);
         } catch (SQLException var3) {
             System.out.println("Nu am reusit " + execute);
+
         }
+
     }
 
     public void insertAdmin(Admin admin) {
         String insertTo = " ";
-        insertTo = insertTo + "insert into admini (id,nume) values (";
-        insertTo = insertTo + String.format("%d,'%s'",admin.getId(),admin.getNume());
+        insertTo = insertTo + "insert into admini (id,nume,parola) values (";
+        insertTo = insertTo + String.format("%d,'%s','%s'",admin.getId(),admin.getNume(),admin.getParola());
         insertTo = insertTo + ");";
         this.executeStatement(insertTo);
     }
@@ -50,6 +52,13 @@ public class AdminRepository {
     public void updateNume(int id , String numeNou){
         String update="";
         update+=String.format("update admini set nume='%s'", numeNou);
+        update+=String.format(" where id=%d", id);
+        executeStatement(update);
+    }
+
+    public void updateParola(int id , String parolaNoua){
+        String update="";
+        update+=String.format("update clienti set parola='%s'", parolaNoua);
         update+=String.format(" where id=%d", id);
         executeStatement(update);
     }
@@ -70,7 +79,7 @@ public class AdminRepository {
         List<Admin> admini = new ArrayList<>();
         try {
             while (set.next()){
-                admini.add(new Admin(set.getInt(1),set.getString(2)));
+                admini.add(new Admin(set.getInt(1),set.getString(2),set.getString(3)));
             }
         }catch (Exception e){
 //            System.out.println("Nu s-a creat lista");

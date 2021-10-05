@@ -88,8 +88,8 @@ public class ProgramareRepository {
 
         try {
             while (set.next()){
-               programari.add(new Programare(set.getInt(1),Programare.initialStringConvert(set.getString(2)),
-                        Programare.initialStringConvert(set.getString(3))));
+               programari.add(new Programare(set.getInt(1),Programare.parameterStringConvert(set.getString(2)),
+                        Programare.parameterStringConvert(set.getString(3))));
             }
         }catch (Exception e){
 //            System.out.println("Nu s-a creat lista");

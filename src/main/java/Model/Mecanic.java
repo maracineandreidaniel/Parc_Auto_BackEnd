@@ -6,10 +6,12 @@ public class Mecanic implements Comparable<Mecanic> {
 
     private int id;
     private String nume;
+    private String parola;
 
-    public Mecanic(int id, String nume){
+    public Mecanic(int id, String nume,String parola){
         this.id=id;
         this.nume=nume;
+        this.parola=parola;
     }
 
     @Override
@@ -32,6 +34,14 @@ public class Mecanic implements Comparable<Mecanic> {
 
     public void setNume(String nume) {
         this.nume = nume;
+    }
+
+    public String getParola() {
+        return parola;
+    }
+
+    public void setParola(String parola) {
+        this.parola = parola;
     }
 
     @Override

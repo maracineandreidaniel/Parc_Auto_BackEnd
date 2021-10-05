@@ -85,7 +85,11 @@ public class Programare implements Comparable<Programare> {
         return text;
     }
 
-    public static String initialStringConvert(String data){
+    public static String convertLDTtoStringTFormat(LocalDateTime ldt){
+        return String.format("%s",ldt);
+    }
+
+    public static String parameterStringConvert(String data){
         String dataF="";
         String[] p1=data.split("T");
         String[] p2=p1[0].split("-");

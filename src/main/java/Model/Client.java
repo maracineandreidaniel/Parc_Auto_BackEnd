@@ -4,11 +4,13 @@ public class Client implements Comparable<Client> {
 
     private int id;
     private String nume;
+    private String parola;
 
 
-    public Client(int id, String nume){
+    public Client(int id, String nume,String parola){
         this.id=id;
         this.nume=nume;
+        this.parola=parola;
     }
 
     @Override
@@ -32,6 +34,13 @@ public class Client implements Comparable<Client> {
         this.nume = nume;
     }
 
+    public String getParola() {
+        return parola;
+    }
+
+    public void setParola(String parola) {
+        this.parola = parola;
+    }
 
     @Override
     public boolean equals(Object o) {

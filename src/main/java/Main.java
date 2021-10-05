@@ -1,3 +1,5 @@
+import Controllers.AdminController;
+import Controllers.ProgramareController;
 import Model.Admin;
 import Model.Client;
 import Model.Programare;
@@ -12,12 +14,10 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        ClientRepository clientRepository=new ClientRepository();
-        clientRepository.insertClient(new Client(1,"client1"));
-        clientRepository.insertClient(new Client(2,"client2"));
-        clientRepository.insertClient(new Client(3,"client3"));
-        clientRepository.removeClient(2);
-        System.out.println(clientRepository.allClienti());
+        ProgramareController programareController=new ProgramareController();
+        Programare p1=new Programare(8,"11,08,2000,06,09","16,10,2006,06,09");
+        System.out.println(programareController.programariContains("11,08,2000,06,09"));
+        programareController.insertProgramare(p1);
 
     }
 }

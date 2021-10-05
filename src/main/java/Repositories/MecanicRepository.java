@@ -31,16 +31,16 @@ public class MecanicRepository {
         }
     }
 
-    public void insertClient(Mecanic mecanic) {
+    public void insertMecanic(Mecanic mecanic) {
         String insertTo = " ";
-        insertTo = insertTo + "insert into mecanici (id,nume) values (";
-        insertTo = insertTo + String.format("%d,'%s'",mecanic.getId(),mecanic.getNume());
+        insertTo = insertTo + "insert into mecanici (id,nume,parola) values (";
+        insertTo = insertTo + String.format("%d,'%s','%s'",mecanic.getId(),mecanic.getNume(),mecanic.getParola());
         insertTo = insertTo + ");";
         this.executeStatement(insertTo);
     }
 
 
-    public void removeClient(int id){
+    public void removeMecanic(int id){
         String removeTo="";
         removeTo+=String.format("%s", "delete from mecanici where id='"+id+"';");
         executeStatement(removeTo);
@@ -50,6 +50,13 @@ public class MecanicRepository {
     public void updateNume(int id , String numeNou){
         String update="";
         update+=String.format("update mecanici set nume='%s'", numeNou);
+        update+=String.format(" where id=%d", id);
+        executeStatement(update);
+    }
+
+    public void updateParola(int id , String parolaNoua){
+        String update="";
+        update+=String.format("update clienti set parola='%s'", parolaNoua);
         update+=String.format(" where id=%d", id);
         executeStatement(update);
     }
@@ -70,7 +77,7 @@ public class MecanicRepository {
         List<Mecanic> mecanici = new ArrayList<>();
         try {
             while (set.next()){
-                mecanici.add(new Mecanic(set.getInt(1),set.getString(2)));
+                mecanici.add(new Mecanic(set.getInt(1),set.getString(2),set.getString(3)));
             }
         }catch (Exception e){
 //            System.out.println("Nu s-a creat lista");

@@ -4,11 +4,21 @@ public class Admin implements Comparable<Admin> {
 
     private int id;
     private String nume;
+    private String parola;
 
 
-    public Admin(int id, String nume){
+    public Admin(int id, String nume,String parola){
         this.id=id;
         this.nume=nume;
+        this.parola=parola;
+    }
+
+    public String getParola() {
+        return parola;
+    }
+
+    public void setParola(String parola) {
+        this.parola = parola;
     }
 
     @Override

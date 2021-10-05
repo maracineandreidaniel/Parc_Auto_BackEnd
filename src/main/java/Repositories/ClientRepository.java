@@ -33,8 +33,8 @@ public class ClientRepository {
 
     public void insertClient(Client client) {
         String insertTo = " ";
-        insertTo = insertTo + "insert into clienti (id,nume) values (";
-        insertTo = insertTo + String.format("%d,'%s'",client.getId(),client.getNume());
+        insertTo = insertTo + "insert into clienti (id,nume,parola) values (";
+        insertTo = insertTo + String.format("%d,'%s','%s'",client.getId(),client.getNume(),client.getParola());
         insertTo = insertTo + ");";
         this.executeStatement(insertTo);
     }
@@ -50,6 +50,13 @@ public class ClientRepository {
     public void updateNume(int id , String numeNou){
         String update="";
         update+=String.format("update clienti set nume='%s'", numeNou);
+        update+=String.format(" where id=%d", id);
+        executeStatement(update);
+    }
+
+    public void updateParola(int id , String parolaNoua){
+        String update="";
+        update+=String.format("update clienti set parola='%s'", parolaNoua);
         update+=String.format(" where id=%d", id);
         executeStatement(update);
     }
@@ -70,7 +77,7 @@ public class ClientRepository {
         List<Client> clienti = new ArrayList<>();
         try {
             while (set.next()){
-                clienti.add(new Client(set.getInt(1),set.getString(2)));
+                clienti.add(new Client(set.getInt(1),set.getString(2),set.getString(3)));
             }
         }catch (Exception e){
 //            System.out.println("Nu s-a creat lista");
