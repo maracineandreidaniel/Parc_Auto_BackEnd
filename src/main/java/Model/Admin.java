@@ -13,6 +13,11 @@ public class Admin implements Comparable<Admin> {
         this.parola=parola;
     }
 
+    public Admin(String nume,String parola){
+        this.nume=nume;
+        this.parola=parola;
+    }
+
     public String getParola() {
         return parola;
     }

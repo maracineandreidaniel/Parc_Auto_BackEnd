@@ -35,8 +35,8 @@ public class AdminRepository {
 
     public void insertAdmin(Admin admin) {
         String insertTo = " ";
-        insertTo = insertTo + "insert into admini (id,nume,parola) values (";
-        insertTo = insertTo + String.format("%d,'%s','%s'",admin.getId(),admin.getNume(),admin.getParola());
+        insertTo = insertTo + "insert into admini (nume,parola) values (";
+        insertTo = insertTo + String.format("'%s','%s'",admin.getNume(),admin.getParola());
         insertTo = insertTo + ");";
         this.executeStatement(insertTo);
     }

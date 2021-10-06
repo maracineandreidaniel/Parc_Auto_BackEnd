@@ -54,6 +54,15 @@ public class MecanicController {
             mecanici.updateParola(mecanicIDByName(nume),parolaNou);
     }
 
+    public Mecanic findMecanic(String name, String parola){
+        for(Mecanic m:mecanici.allMecanici())
+            if(m.getNume().equals(name) && m.getParola().equals(parola))
+                return m;
+        System.out.println("Mecanicul nu a fost gasit in baza de date!");
+           return null;
+
+    }
+
 
 
 }

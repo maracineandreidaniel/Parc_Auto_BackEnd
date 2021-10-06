@@ -33,8 +33,8 @@ public class ClientRepository {
 
     public void insertClient(Client client) {
         String insertTo = " ";
-        insertTo = insertTo + "insert into clienti (id,nume,parola) values (";
-        insertTo = insertTo + String.format("%d,'%s','%s'",client.getId(),client.getNume(),client.getParola());
+        insertTo = insertTo + "insert into clienti (nume,parola) values (";
+        insertTo = insertTo + String.format("'%s','%s'",client.getNume(),client.getParola());
         insertTo = insertTo + ");";
         this.executeStatement(insertTo);
     }
@@ -85,6 +85,16 @@ public class ClientRepository {
             return null;
         }
         return clienti;
+    }
+
+    public static boolean containsClient(String nume){
+        int flg=0;
+        for(Client client:new ClientRepository().allClienti())
+            if(client.getNume().equals(nume))
+                flg=1;
+            if(flg==1)
+                return true;
+            return false;
     }
 
 

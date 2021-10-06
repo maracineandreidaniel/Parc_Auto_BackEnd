@@ -1,5 +1,7 @@
 package Model;
 
+import Repositories.MecanicRepository;
+
 import java.util.Objects;
 
 public class Mecanic implements Comparable<Mecanic> {
@@ -12,6 +14,15 @@ public class Mecanic implements Comparable<Mecanic> {
         this.id=id;
         this.nume=nume;
         this.parola=parola;
+    }
+
+    public Mecanic(String nume,String parola){
+        this.nume=nume;
+        this.parola=parola;
+    }
+
+    public Mecanic(String nume) throws Exception {
+            this.nume=nume;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package Controllers;
 
 import Model.Admin;
+import Model.Mecanic;
 import Repositories.AdminRepository;
 
 public class AdminController {
@@ -52,6 +53,15 @@ public class AdminController {
             System.out.println("Adminul nu a fost gasit!");
         else
             admini.updateParola(adminIDByName(nume),parolaNou);
+    }
+
+    public Admin findAdmin(String name, String parola){
+        for(Admin a:admini.allAdmini())
+            if(a.getNume().equals(name) && a.getParola().equals(parola))
+                return a;
+        System.out.println("Adminul nu a fost gasit in baza de date!");
+        return null;
+
     }
 
 

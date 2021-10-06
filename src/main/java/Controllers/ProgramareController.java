@@ -1,7 +1,11 @@
 package Controllers;
 
 import Model.Programare;
+import Repositories.ClientRepository;
+import Repositories.MecanicRepository;
 import Repositories.ProgramareRepository;
+
+import java.util.List;
 
 public class ProgramareController {
 
@@ -11,11 +15,23 @@ public class ProgramareController {
         this.programari=new ProgramareRepository();
     }
 
-    public void insertProgramare(Programare programare){
-        if(programariContains(Programare.parameterStringConvert(Programare.convertLDTtoStringTFormat(programare.getDataInceput())))==false)
-            programari.insertProgramare(programare);
-        else
-            System.out.println("Programarea exista deja!");
+    public void insertProgramare(Programare programare) throws Exception {
+        if(ClientRepository.containsClient(programare.getClient().getNume())==false)
+            throw new Exception("CLientul nu se regaseste in baza de date!");
+        else if(MecanicRepository.containsMecanic(programare.getMecanic().getNume())==false)
+            throw new Exception("Mecanicul nu se regaseste in baza de date!");
+        else {
+            int flag = 0;
+            for (Programare prog : programari.allProgramari())
+                if (prog.equals(programare))
+                    flag = 1;
+            if (programariContains(Programare.parameterStringConvert(Programare.convertLDTtoStringTFormat(programare.getDataInceput()))) == true)
+                System.out.println("Programarea exista deja!");
+            else if (flag == 1)
+                System.out.println("Programarea se suprapune!");
+            else if (programariContains(Programare.parameterStringConvert(Programare.convertLDTtoStringTFormat(programare.getDataInceput()))) == false)
+                programari.insertProgramare(programare);
+        }
     }
 
     public Programare programareByDI(String dataInceput){
@@ -53,6 +69,10 @@ public class ProgramareController {
             programari.updateDataSfarsit(programareByDI(di).getProgramare_id(),nouDS);
         else
             System.out.println("Programarea nu exista!");
+    }
+
+    public List<Programare> allProgramari(){
+        return programari.allProgramari();
     }
 
 

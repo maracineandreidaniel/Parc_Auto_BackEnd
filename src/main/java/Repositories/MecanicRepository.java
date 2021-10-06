@@ -1,5 +1,6 @@
 package Repositories;
 
+import Model.Client;
 import Model.Mecanic;
 import java.sql.*;
 import java.util.ArrayList;
@@ -33,8 +34,8 @@ public class MecanicRepository {
 
     public void insertMecanic(Mecanic mecanic) {
         String insertTo = " ";
-        insertTo = insertTo + "insert into mecanici (id,nume,parola) values (";
-        insertTo = insertTo + String.format("%d,'%s','%s'",mecanic.getId(),mecanic.getNume(),mecanic.getParola());
+        insertTo = insertTo + "insert into mecanici (nume,parola) values (";
+        insertTo = insertTo + String.format("'%s','%s'",mecanic.getNume(),mecanic.getParola());
         insertTo = insertTo + ");";
         this.executeStatement(insertTo);
     }
@@ -85,6 +86,16 @@ public class MecanicRepository {
             return null;
         }
         return mecanici;
+    }
+
+    public static boolean containsMecanic(String nume){
+        int flg=0;
+        for(Mecanic mecanic:new MecanicRepository().allMecanici())
+            if(mecanic.getNume().equals(nume))
+                flg=1;
+        if(flg==1)
+            return true;
+        return false;
     }
 
 

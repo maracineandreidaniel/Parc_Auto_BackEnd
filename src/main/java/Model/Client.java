@@ -1,5 +1,7 @@
 package Model;
 
+import Repositories.ClientRepository;
+
 public class Client implements Comparable<Client> {
 
     private int id;
@@ -11,6 +13,19 @@ public class Client implements Comparable<Client> {
         this.id=id;
         this.nume=nume;
         this.parola=parola;
+    }
+
+    public Client(String nume,String parola){
+        this.nume=nume;
+        this.parola=parola;
+    }
+
+    public Client(String nume) throws Exception {
+//        if(ClientRepository.containsClient(nume))
+            this.nume=nume;
+//        else
+//           throw new Exception("Nu exista clientul in baza de date.");
+//            System.out.println("client nu");
     }
 
     @Override

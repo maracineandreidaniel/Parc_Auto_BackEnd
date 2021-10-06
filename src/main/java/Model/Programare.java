@@ -8,6 +8,8 @@ public class Programare implements Comparable<Programare> {
     private int programare_id;
     private LocalDateTime dataInceput;
     private LocalDateTime dataSfarsit;
+    private Client client;
+    private Mecanic mecanic;
 
     //dd,mm,yyyy,hh,mm
 
@@ -28,6 +30,37 @@ public class Programare implements Comparable<Programare> {
         programare_id=id;
     }
 
+    public Programare(int id,LocalDateTime ldi, LocalDateTime lds,Mecanic mecanic, Client client){
+        dataInceput=ldi;
+        dataSfarsit=lds;
+        programare_id=id;
+        this.mecanic=mecanic;
+        this.client=client;
+    }
+
+    public Programare(LocalDateTime ldi, LocalDateTime lds,Mecanic mecanic, Client client){
+        dataInceput=ldi;
+        dataSfarsit=lds;
+        this.mecanic=mecanic;
+        this.client=client;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Mecanic getMecanic() {
+        return mecanic;
+    }
+
+    public void setMecanic(Mecanic mecanic) {
+        this.mecanic = mecanic;
+    }
+
     public int getProgramare_id() {
         return programare_id;
     }
@@ -36,10 +69,14 @@ public class Programare implements Comparable<Programare> {
         this.programare_id = programare_id;
     }
 
-    public Programare(int id, String ldi, String lds){
+
+
+    public Programare(int id, String ldi, String lds,Mecanic mecanic, Client client){
         dataInceput=convertStringLocalDateTime(ldi);
         dataSfarsit=convertStringLocalDateTime(lds);
         programare_id=id;
+        this.mecanic=mecanic;
+        this.client=client;
     }
 
 
@@ -81,7 +118,9 @@ public class Programare implements Comparable<Programare> {
        DateTimeFormatter format=DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm:ss a");
         text+="Programarea "+ programare_id+ " incepe la "+dataInceput.format(format);
         text+=" si se sfarseste la "+dataSfarsit.format(format);
-        text+=" si dureaza "+this.getDurata().toHours()+" ore";
+        text+=" si dureaza "+this.getDurata().toHours()+" ore la mecanicul ";
+        text+=this.getMecanic().getNume()+" pentru clientul "+this.client.getNume();
+
         return text;
     }
 

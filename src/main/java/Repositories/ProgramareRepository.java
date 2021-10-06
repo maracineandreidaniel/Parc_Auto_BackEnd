@@ -1,5 +1,7 @@
 package Repositories;
 
+import Model.Client;
+import Model.Mecanic;
 import Model.Programare;
 
 import java.sql.*;
@@ -33,13 +35,14 @@ public class ProgramareRepository {
     }
 
 
-        public void insertProgramare(Programare programare) {
-        String insertTo = " ";
-        insertTo = insertTo + "insert into programari (id,dataInceput,dataSfarsit) values (";
-        insertTo = insertTo + String.format("%d,'%s','%s'",programare.getProgramare_id(),programare.getDataInceput(), programare.getDataSfarsit());
-        insertTo = insertTo + ");";
-        this.executeStatement(insertTo);
-    }
+        public void insertProgramare(Programare programare) throws Exception {
+            String insertTo = " ";
+            insertTo = insertTo + "insert into programari (dataInceput,dataSfarsit,mecanic,client) values (";
+            insertTo = insertTo + String.format("'%s','%s','%s','%s'",programare.getDataInceput(), programare.getDataSfarsit(), programare.getMecanic().getNume(), programare.getClient().getNume());
+            insertTo = insertTo + ");";
+            this.executeStatement(insertTo);
+        }
+
 
 
     public void removeProgramare(int id){
@@ -89,7 +92,7 @@ public class ProgramareRepository {
         try {
             while (set.next()){
                programari.add(new Programare(set.getInt(1),Programare.parameterStringConvert(set.getString(2)),
-                        Programare.parameterStringConvert(set.getString(3))));
+                        Programare.parameterStringConvert(set.getString(3)),new Mecanic(set.getString(4)),new Client(set.getString(5))));
             }
         }catch (Exception e){
 //            System.out.println("Nu s-a creat lista");

@@ -1,6 +1,7 @@
 package Controllers;
 
 import Model.Client;
+import Model.Mecanic;
 import Repositories.ClientRepository;
 
 public class ClientController {
@@ -52,6 +53,15 @@ public class ClientController {
             System.out.println("Clientul nu a fost gasit!");
         else
             clienti.updateParola(clientIDByName(nume),parolaNou);
+    }
+
+    public Client findClient(String name, String parola){
+        for(Client c:clienti.allClienti())
+            if(c.getNume().equals(name) && c.getParola().equals(parola))
+                return c;
+        System.out.println("Clientul nu a fost gasit in baza de date!");
+        return null;
+
     }
 
 
